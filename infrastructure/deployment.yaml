@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: project-5-udacity
+  labels:
+    app: project-5-udacity
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: project-5-udacity
+  template:
+    metadata:
+      labels:
+        app: project-5-udacity
+    spec:
+      containers:
+        - name: project-5-udacity
+          image: 976245815270.dkr.ecr.us-east-1.amazonaws.com/project-5-minhpb3:lastest
+          imagePullPolicy: Always
+          ports:
+            - name: app
+              containerPort: 80
+      imagePullSecrets:
+        - name: awscreds
