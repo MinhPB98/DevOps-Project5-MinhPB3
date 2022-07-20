@@ -63,9 +63,9 @@ jobs:
           docker_layer_caching: false
       - run:
           name:  build docker and push to ECR
-          command: |
-            aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin "${DOMAIN_REPO}"
+          command: |            
             docker build . -t project-5-minhpb3:v1
+            aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin "${DOMAIN_REPO}"
             docker tag project-5-minhpb3:v1 "${REPOSITORY_ECR}":v1
             docker push "${REPOSITORY_ECR}":v1
   create-aws-cluster:
