@@ -6,7 +6,7 @@ WORKDIR /web
 ## Step 2:
 # Copy source code to working directory
 COPY requirements.txt app.py  /web/
-COPY COPY templates /web/templates
+COPY templates /web/templates
 
 ## Step 3:
 # Install packages from requirements.txt
