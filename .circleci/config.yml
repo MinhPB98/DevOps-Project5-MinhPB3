@@ -95,6 +95,9 @@ jobs:
       - kubernetes/create-or-update-resource:
           resource-file-path: infrastructure/infrastructure.yaml
           show-kubectl-command: true
+      - run:
+          command: |
+            kubectl get all 
 workflows:
   deployment:
     jobs:
