@@ -75,7 +75,7 @@ jobs:
       - checkout
       - aws_cli_install
       - aws_configure_credentials
-      - aws-eks/create-aws-cluster:
+      - aws-eks/create-cluster:
           cluster-name: project-5-udacity
           aws-region: us-east-2
           node-type: t2.micro
