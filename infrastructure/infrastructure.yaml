@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: project-5-udacity
-          image: 976245815270.dkr.ecr.us-east-1.amazonaws.com/project-5-minhpb3:lastest
+          image: 976245815270.dkr.ecr.us-east-1.amazonaws.com/project-5-minhpb3:v1
           imagePullPolicy: Always
           ports:
             - name: app
