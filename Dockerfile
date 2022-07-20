@@ -22,6 +22,3 @@ EXPOSE 80
 # Run app.py at container launch
 CMD ["python", "app.py"]
 
-export AWS_ACCESS_KEY_ID=ASIA6GTGI67TIPFS2PMS
-export AWS_SECRET_ACCESS_KEY=+3YBt0GH5nY2+3DBryzgkWe9M0RC1tlcDFy5BN6s
-export AWS_DEFAULT_REGION=us-west-2
