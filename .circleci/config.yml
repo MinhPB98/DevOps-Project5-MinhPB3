@@ -64,18 +64,18 @@ jobs:
       - run:
           name:  build docker and push to ECR
           command: |
+            aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin "${DOMAIN_REPO}"
             docker build . -t project-5-minhpb3:v1
-            aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin "${DOMAIN_REPO_ECR}"
             docker tag project-5-minhpb3:v1 "${REPOSITORY_ECR}":v1
             docker push "${REPOSITORY_ECR}":v1
-  create-cluster:
+  create-aws-cluster:
     docker:
       - image: 'cimg/python:3.10'
     steps:
       - checkout
       - aws_cli_install
       - aws_configure_credentials
-      - aws-eks/create-cluster:
+      - aws-eks/create-aws-cluster:
           cluster-name: project-5-udacity
           aws-region: us-east-2
           node-type: t2.micro
@@ -102,8 +102,8 @@ workflows:
       - build-and-push-image-docker:
           requires:
             - "check-dockerfile"
-      - create-cluster:
+      - create-aws-cluster:
           requires:
             - "check-dockerfile"
       - create-deployment:
-          requires: [build-and-push-image-docker, create-cluster]
+          requires: [build-and-push-image-docker, create-aws-cluster]
