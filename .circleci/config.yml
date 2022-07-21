@@ -79,8 +79,8 @@ jobs:
           cluster-name: project-5-udacity
           aws-region: us-east-2
           node-type: t3.medium
-          nodes-min: 2
-          nodes-max: 4
+          nodes-min: 1
+          nodes-max: 3
   create-deployment:
     docker:
       - image: "cimg/python:3.10"
