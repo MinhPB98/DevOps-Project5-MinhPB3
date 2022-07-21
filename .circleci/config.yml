@@ -1,4 +1,4 @@
-version: '2.1'
+version: "2.1"
 orbs:
   aws-eks: circleci/aws-eks@2.2.0
   kubernetes: circleci/kubernetes@1.3
@@ -30,10 +30,10 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          keys: 
+          keys:
             - v1-dependencies-{{ checksum "requirements.txt" }}
             - v1-dependencies-
-      - run:  
+      - run:
           name: install dependencies
           command: |
             python3 -m venv venv
@@ -46,13 +46,13 @@ jobs:
             - ./venv
           key: v1-dependencies-{{ checksum "requirements.txt" }}
       - run:
-          name: run lint 
+          name: run lint
           command: |
             . venv/bin/activate
             make lint
   build-and-push-image-docker:
     docker:
-      - image: 'cimg/python:3.10'
+      - image: "cimg/python:3.10"
         user: root
     steps:
       - checkout
@@ -62,15 +62,15 @@ jobs:
           version: 20.10.14
           docker_layer_caching: false
       - run:
-          name:  build docker and push to ECR
-          command: |            
+          name: build docker and push to ECR
+          command: |
             docker build . -t project-5-minhpb3:v1
             aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin "${DOMAIN_REPO}"
             docker tag project-5-minhpb3:v1 "${REPOSITORY_ECR}":v1
             docker push "${REPOSITORY_ECR}":v1
   create-aws-cluster:
     docker:
-      - image: 'cimg/python:3.10'
+      - image: "cimg/python:3.10"
     steps:
       - checkout
       - aws_cli_install
@@ -81,10 +81,9 @@ jobs:
           node-type: t2.micro
           nodes-min: 1
           nodes-max: 2
-          ssh-public-key: udacity.pem
   create-deployment:
-    docker: 
-      - image: 'cimg/python:3.10'
+    docker:
+      - image: "cimg/python:3.10"
     steps:
       - checkout
       - aws_cli_install
@@ -98,6 +97,7 @@ jobs:
       - run:
           command: |
             kubectl get all 
+            kubectl describe pods
 workflows:
   deployment:
     jobs:
