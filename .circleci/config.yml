@@ -99,7 +99,9 @@ jobs:
           show-kubectl-command: true
       - run:
           command: |
+            kubectl get nodes -o wide
             kubectl get all 
+            kubectl get svc -o wide
             kubectl describe pods
 workflows:
   deployment:
