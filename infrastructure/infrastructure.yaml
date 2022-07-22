@@ -21,8 +21,7 @@ spec:
           ports:
             - name: app
               containerPort: 80
-      imagePullSecrets:
-        - name: awscreds
+
 ---
 apiVersion: v1
 kind: Service
